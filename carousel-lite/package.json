@@ -1,0 +1,27 @@
+{
+  "name": "carousel-lite",
+  "version": "0.0.1",
+  "description": "Touch friendly. Incredibly small. Carousels the native way.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emflores/carusel-lite.git"
+  },
+  "keywords": [
+    "carousel",
+    "carousels",
+    "slides"
+  ],
+  "author": "Michael Flores <flores.michael@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emflores/carusel-lite/issues"
+  },
+  "homepage": "https://github.com/emflores/carusel-lite"
+}
