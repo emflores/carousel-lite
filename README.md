@@ -68,3 +68,8 @@ Selector for next button
 
 ### `previous`
 Selector for previous button
+
+## Example
+Don't mind the browserified code. Please seek out the `example/` directory for a clearer picture of the JS implementation (hint: it is simple).
+
+http://codepen.io/anon/pen/YPveqM
