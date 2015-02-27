@@ -18,7 +18,7 @@ function bindHandlers ( carousel, items, next, previous ) {
  * Adds carousel next/previous handlers to a carousel
  * @param  {object}   args
  * @param  {string}   args.carousel     Selector for carousel ul
- * @param  {string}   args.items        Selector for li children of carousel ul
+ * @param  {string}   args.items        Selector for li children of the carousel ul
  * @param  {string}   args.next         Selector for next button
  * @param  {string}   args.previous     Selector for previous button
  */
