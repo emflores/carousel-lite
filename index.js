@@ -1,33 +1,36 @@
 var win = require( './util' ).win;
 
-function isDisabled ( newIndex, items ) {
+var DISABLED = 'carousel-button-disabled';
+
+function isDisabled ( newIndex, nextPos, maxScroll ) {
     return {
         previous:  newIndex === 0,
-        next:      newIndex === items.length
+        next:      nextPos >= maxScroll
     };
+}
+
+function toggleDisabled ( el, add ) {
+    el.classList.toggle( DISABLED, add );
 }
 
 function getRotator ( carousel, items, next, previous ) {
     return function ( reverse ) {
         var currentIndex = carousel.currentIndex || 0;
-        var currentItem  = items[ currentIndex ];
-        var nextPos      = currentItem.offsetLeft - carousel.offsetLeft + currentItem.offsetWidth;
-
+        var maxScroll    = carousel.scrollWidth - carousel.clientWidth;
         var incrementor  = reverse ? -1 : 1;
+        var direction    = reverse ? previous : next;
         var newIndex     = currentIndex += incrementor;
+        var currentItem  = items[ newIndex ];
 
-        // @todo - this is broken. need to figure out a way how to calculate
-        // when there is no more room to scroll.
-        //
-        // Do we enable/disable the next button based the scrollable area too?
-        if ( newIndex < 0 || nextPos >= carousel.scrollWidth ) {
+        if ( direction.classList.contains( DISABLED ) ) {
             return;
         }
 
-        var disabled = isDisabled( newIndex, items );
+        var nextPos  = currentItem.offsetLeft - carousel.offsetLeft;
+        var disabled = isDisabled( newIndex, nextPos, maxScroll );
 
-        previous.classList.toggle( 'disabled', disabled.previous );
-        next.classList.toggle( 'disabled', disabled.next );
+        toggleDisabled( previous, disabled.previous );
+        toggleDisabled( next, disabled.next );
 
         carousel.scrollLeft   = nextPos;
         carousel.currentIndex = newIndex;
@@ -55,6 +58,9 @@ module.exports.register = function ( args ) {
     if ( !carousel || !next || !previous || !items.length ) {
         return;
     }
+
+    // Disable the "previous" button
+    toggleDisabled( previous, true );
 
     bindHandlers( carousel, items, next, previous );
 };
