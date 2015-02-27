@@ -1,0 +1,30 @@
+ul {
+    padding-left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 300px;
+}
+
+li {
+    display: inline-block;
+    height: 50px;
+    width:  50px;
+}
+
+li:nth-child(odd) {
+    background-color: red;
+}
+
+li:nth-child(even) {
+    background-color: blue;
+}
+
+@media (max-width: 640px) {
+    button {
+        display: none;
+    }
+
+    ul {
+        overflow: auto;
+    }
+}
