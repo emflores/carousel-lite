@@ -17,7 +17,7 @@ function getRotator ( carousel, items, next, previous ) {
         var maxScroll    = carousel.scrollWidth - carousel.clientWidth;
         var incrementor  = reverse ? -1 : 1;
         var direction    = reverse ? previous : next;
-        var newIndex     = currentIndex += incrementor;
+        var newIndex     = currentIndex + incrementor;
         var currentItem  = items[ newIndex ];
 
         if ( direction.classList.contains( DISABLED ) ) {

@@ -4,7 +4,7 @@ var sinon = require( 'sinon' );
 
 var _noop   = require( 'lodash/utility/noop' );
 var _assign = require( 'lodash/object/assign' );
-var _clone  = require( 'lodash/lang/clone' );
+var _clone  = require( 'lodash/lang/cloneDeep' );
 
 // Fixtures
 var args = require( './fixtures' ).args;
@@ -52,20 +52,20 @@ describe( 'Carousel Lite', function () {
         carousel = getCarousel();
     });
 
-    it( 'Gets all necessary DOM elements', function () {
+    it( 'gets all necessary DOM elements', function () {
         carousel.register( args );
 
         spies.querySelector.calledWith( args[ 'carousel', 'previous', 'next' ] ).should.be.true;
         spies.querySelectorAll.calledWith( args[ 'items' ] ).should.be.true;
     });
 
-    it( 'Short circuits if one of the DOm elements are not found', function () {
+    it( 'short circuits if one of the DOm elements are not found', function () {
         carousel = getCarousel( false, { items: [] } );
         var result = carousel.register( args );
         ( typeof result === 'undefined' ).should.be.true;
     });
 
-    it( 'Disables the previous button by default', function () {
+    it( 'disables the previous button by default', function () {
         var toggleSpy  = sinon.spy();
         var customEls  = _clone( baseEls );
         carousel = getCarousel( { toggle: toggleSpy }, customEls );
@@ -73,13 +73,13 @@ describe( 'Carousel Lite', function () {
         toggleSpy.calledWith( customEls.previous, true ).should.be.true;
     });
 
-    it( 'Binds all necessary handlers', function () {
+    it( 'binds all necessary handlers', function () {
         var eventListenerSpy = sinon.spy();
         var customEls = {
             previous: _assign( _clone( baseEls[ 'previous' ] ), { addEventListener: eventListenerSpy } ),
             next: _assign( _clone( baseEls[ 'next'] ), { addEventListener: eventListenerSpy } )
         };
-        carousel = getCarousel( false, _assign( baseEls, customEls ) );
+        carousel = getCarousel( false, _assign( _clone( baseEls ), customEls ) );
         carousel.register( args );
         eventListenerSpy.calledTwice.should.be.true;
     });

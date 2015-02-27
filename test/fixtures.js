@@ -1,4 +1,5 @@
-var _clone = require( 'lodash/lang/clone' );
+var _clone  = require( 'lodash/lang/cloneDeep' );
+var _assign = require( 'lodash/object/assign' );
 
 module.exports.args = {
     carousel: 'carousel',
@@ -12,7 +13,7 @@ var baseElement = {
     clientWidth: 0,
     offsetLeft:  0,
     classList: {
-        toggleClass: function ( className, add ) {
+        toggle: function ( className, add ) {
             if ( add ) {
                 this.classes.push( className );
                 return;
@@ -36,12 +37,13 @@ var baseElement = {
 }
 
 module.exports.els = {
-    carousel: _clone( baseElement ),
+    carousel: _assign( _clone( baseElement ), { offsetLeft: 0, scrollWidth: 150, clientWidth: 100 } ),
     next:     _clone( baseElement ),
     previous: _clone( baseElement ),
     items:    [
-        _clone( baseElement ),
-        _clone( baseElement )
+        _assign( _clone( baseElement ), { offsetLeft: 0 } ),
+        _assign( _clone( baseElement ), { offsetLeft: 50 } ),
+        _assign( _clone( baseElement ), { offsetLeft: 100 } )
     ]
 
 };
