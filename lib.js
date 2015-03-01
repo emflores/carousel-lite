@@ -1,10 +1,21 @@
 var DISABLED = 'carousel-button-disabled';
 
+var _findIndex = require( 'lodash-compat/array/findIndex' );
+
 function isDisabled ( newIndex, nextPos, maxScroll ) {
     return {
         previous:  newIndex === 0,
         next:      nextPos >= maxScroll
     };
+}
+
+function syncScrollIndex ( carousel, items ) {
+    var carouselScroll = carousel.scrollLeft;
+    var carouselOffset = carousel.offsetLeft;
+
+    return _findIndex( items, function ( item ) {
+        return ( item.offsetLeft - carouselOffset ) >= carouselScroll;
+    });
 }
 
 function toggleDisabled ( el, add ) {
@@ -35,5 +46,6 @@ function getRotator ( carousel, items, next, previous ) {
     };
 }
 
-module.exports.toggleDisabled = toggleDisabled;
-module.exports.getRotator     = getRotator;
+module.exports.toggleDisabled  = toggleDisabled;
+module.exports.getRotator      = getRotator;
+module.exports.syncScrollIndex = syncScrollIndex;

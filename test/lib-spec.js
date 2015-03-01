@@ -3,8 +3,8 @@ var sinon = require( 'sinon' );
 
 var lib = require( '../lib' );
 
-var _assign = require( 'lodash/object/assign' );
-var _clone  = require( 'lodash/lang/cloneDeep' );
+var _assign = require( 'lodash-compat/object/assign' );
+var _clone  = require( 'lodash-compat/lang/cloneDeep' );
 
 // Fixtures
 var baseEls = require( './fixtures' ).els;

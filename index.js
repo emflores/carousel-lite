@@ -1,9 +1,23 @@
-var win            = require( './browser-shim' );
-var toggleDisabled = require( './lib' ).toggleDisabled;
-var getRotator     = require( './lib' ).getRotator;
+var win             = require( './browser-shim' );
+var toggleDisabled  = require( './lib' ).toggleDisabled;
+var getRotator      = require( './lib' ).getRotator;
+var syncScrollIndex = require( './lib' ).syncScrollIndex;
+
+function addScrollSuppressor ( rotate, carousel ) {
+    return function ( reverse ) {
+        carousel.ignoreScroll = true;
+        rotate( reverse );
+        setTimeout( function () {
+            carousel.ignoreScroll = false;
+        }, 0 );
+    };
+}
 
 function bindHandlers ( carousel, items, next, previous ) {
-    var rotate = getRotator( carousel, items, next, previous );
+    var rotate = addScrollSuppressor(
+        getRotator( carousel, items, next, previous ),
+        carousel
+    );
 
     next.addEventListener( 'click', function () {
         rotate();
@@ -11,6 +25,17 @@ function bindHandlers ( carousel, items, next, previous ) {
 
     previous.addEventListener( 'click', function () {
         rotate( true );
+    });
+
+    carousel.addEventListener( 'scroll', function () {
+        if ( carousel.ignoreScroll ) {
+            return;
+        }
+
+        carousel.currentIndex = Math.max(
+            syncScrollIndex( carousel, items ) - 1,
+            0
+        );
     });
 }
 

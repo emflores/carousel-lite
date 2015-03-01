@@ -2,9 +2,9 @@ require( 'should' );
 var pquire = require( 'proxyquire' ).noCallThru();
 var sinon = require( 'sinon' );
 
-var _noop   = require( 'lodash/utility/noop' );
-var _assign = require( 'lodash/object/assign' );
-var _clone  = require( 'lodash/lang/cloneDeep' );
+var _noop   = require( 'lodash-compat/utility/noop' );
+var _assign = require( 'lodash-compat/object/assign' );
+var _clone  = require( 'lodash-compat/lang/cloneDeep' );
 
 // Fixtures
 var args = require( './fixtures' ).args;
@@ -40,7 +40,8 @@ var getCarousel = function ( overrides, els ) {
             toggleDisabled: overrides.toggle || _noop,
             getRotator: function () {
                 return _noop;
-            }
+            },
+            syncScrollIndex: _noop
         }
     });
 };
