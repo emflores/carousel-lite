@@ -1,7 +1,7 @@
 var win             = require( './browser-shim' );
 var toggleDisabled  = require( './lib' ).toggleDisabled;
 var getRotator      = require( './lib' ).getRotator;
-var syncScrollIndex = require( './lib' ).syncScrollIndex;
+var getScrollIndex  = require( './lib' ).getScrollIndex;
 
 /**
  * The scroll listener on the carousel short circuits if the

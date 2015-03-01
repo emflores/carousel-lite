@@ -21,7 +21,13 @@ describe( 'Carousel Lite Lib', function () {
     });
 
     describe( 'Sync Scroll Index', function () {
-
+        it( 'returns the index position of the first item that has an offset >= the carousel\'s scrollLeft', function () {
+            var result = lib.getScrollIndex(
+                _assign( _clone( baseEls[ 'carousel' ] ), { scrollLeft: 51  } ),
+                _clone( baseEls[ 'items' ] )
+            );
+            result.should.equal( 2 );
+        });
     });
 
     describe( 'Rotator', function () {

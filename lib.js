@@ -17,7 +17,7 @@ function isDisabled ( newIndex, nextPos, maxScroll ) {
  * @param  {array}  items
  * @return {integer}
  */
-function syncScrollIndex ( carousel, items ) {
+function getScrollIndex ( carousel, items ) {
     var carouselScroll = carousel.scrollLeft;
     var carouselOffset = carousel.offsetLeft;
 
@@ -54,6 +54,6 @@ function getRotator ( carousel, items, next, previous ) {
     };
 }
 
-module.exports.toggleDisabled  = toggleDisabled;
-module.exports.getRotator      = getRotator;
-module.exports.syncScrollIndex = syncScrollIndex;
+module.exports.toggleDisabled = toggleDisabled;
+module.exports.getRotator     = getRotator;
+module.exports.getScrollIndex = getScrollIndex;
