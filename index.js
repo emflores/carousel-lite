@@ -70,7 +70,8 @@ module.exports.register = function ( args ) {
         return;
     }
 
-    // Disable the "previous" button
+    // Disable the "previous" button by default, and the next button
+    // if the entirety of list fits within the carousel's clientWidth.
     toggleDisabled( previous, true );
     toggleDisabled( next, shouldDisableNext( carousel, items ) );
 

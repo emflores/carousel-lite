@@ -2,6 +2,25 @@
 
 > Touch friendly. Incredibly small. Carousels the native way.
 
+## Registering a carousel
+```js
+carousel.register( args );
+```
+Must provide the following arguments:
+
+### `carousel`
+Selector for carousel ul
+
+### `items`
+Selector for li children of the carousel ul
+
+### `next`
+Selector for next button
+
+### `previous`
+Selector for previous button
+
+
 ## Carousel Markup
 Nothing more is needed than a simple list:
 ```html
@@ -33,7 +52,9 @@ The elements that you choose for your next/previous buttons can be anything, but
 ```
 
 ## Next/Previous Styles
-When a previous/next button is disabled (the carousel is at the beginning or end of a list, respectively), `carousel-button-disabled` is added to its class list. You can use this to style the buttons appropriately.
+When the previous or next button is disabled (the carousel is at the beginning or end of a list, respectively), `carousel-button-disabled` is added to its class list. You can use this to style the buttons appropriately.
+
+When a carousel is registered, the previous button is automatically disabled. The next button is disabled as well if the entirety of list fits within the carousel's clientWidth.
 
 ## Optional Styles
 To fall back on native touch scroll interaction for mobile devices, add in a media query like this:
@@ -50,26 +71,3 @@ To fall back on native touch scroll interaction for mobile devices, add in a med
 }
 
 ```
-
-## Registering a carousel
-```js
-carousel.register( args );
-```
-Must provide the following arguments:
-
-### `carousel`
-Selector for carousel ul
-
-### `items`
-Selector for li children of the carousel ul
-
-### `next`
-Selector for next button
-
-### `previous`
-Selector for previous button
-
-## Example
-http://codepen.io/anon/pen/YPveqM
-
-Don't mind the browserified code. Please seek out the `example/` directory for a clearer picture of the JS implementation (hint: it is simple).
