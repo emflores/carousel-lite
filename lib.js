@@ -26,6 +26,12 @@ function getScrollIndex ( carousel, items ) {
     });
 }
 
+function shouldDisableNext ( carousel, items ) {
+    var lastItem            = items[ items.length - 1 ];
+    var lastItemRightOffset = lastItem.offsetLeft - carousel.offsetLeft + lastItem.offsetWidth;
+    return lastItemRightOffset <= carousel.clientWidth;
+}
+
 function toggleDisabled ( el, add ) {
     el.classList.toggle( DISABLED, add );
 }
@@ -54,6 +60,7 @@ function getRotator ( carousel, items, next, previous ) {
     };
 }
 
-module.exports.toggleDisabled = toggleDisabled;
-module.exports.getRotator     = getRotator;
-module.exports.getScrollIndex = getScrollIndex;
+module.exports.toggleDisabled    = toggleDisabled;
+module.exports.getRotator        = getRotator;
+module.exports.getScrollIndex    = getScrollIndex;
+module.exports.shouldDisableNext = shouldDisableNext;

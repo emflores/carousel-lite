@@ -20,13 +20,32 @@ describe( 'Carousel Lite Lib', function () {
         });
     });
 
-    describe( 'Sync Scroll Index', function () {
+    describe( 'Get Scroll Index', function () {
         it( 'returns the index position of the first item that has an offset >= the carousel\'s scrollLeft', function () {
             var result = lib.getScrollIndex(
                 _assign( _clone( baseEls[ 'carousel' ] ), { scrollLeft: 51  } ),
                 _clone( baseEls[ 'items' ] )
             );
             result.should.equal( 2 );
+        });
+    });
+
+    describe( 'Should Disable Next', function () {
+        it( 'returns true if the last item in the list\'s right offset is <= the client width of the carousel', function () {
+            var result = lib.shouldDisableNext(
+                _assign( _clone( baseEls[ 'carousel' ] ), { clientWidth: 150  } ),
+                _clone( baseEls[ 'items' ] )
+            );
+            result.should.be.true;
+        });
+
+        it( 'returns false if the last item in the list\'s right offset is > the client width of the carousel', function () {
+            var result = lib.shouldDisableNext(
+                _assign( _clone( baseEls[ 'carousel' ] ), { clientWidth: 149  } ),
+                _clone( baseEls[ 'items' ] )
+            );
+
+            result.should.be.false;
         });
     });
 

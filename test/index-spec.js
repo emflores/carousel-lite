@@ -41,7 +41,8 @@ var getCarousel = function ( overrides, els ) {
             getRotator: function () {
                 return _noop;
             },
-            syncScrollIndex: _noop
+            syncScrollIndex: _noop,
+            shouldDisableNext: _noop
         }
     });
 };

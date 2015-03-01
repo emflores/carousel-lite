@@ -12,6 +12,7 @@ var baseElement = {
     scrollWidth: 0,
     clientWidth: 0,
     offsetLeft:  0,
+    offsetWidth: 50,
     classList: {
         toggle: function ( className, add ) {
             if ( add ) {

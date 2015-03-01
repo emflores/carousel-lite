@@ -1,7 +1,8 @@
-var win             = require( './browser-shim' );
-var toggleDisabled  = require( './lib' ).toggleDisabled;
-var getRotator      = require( './lib' ).getRotator;
-var getScrollIndex  = require( './lib' ).getScrollIndex;
+var win               = require( './browser-shim' );
+var toggleDisabled    = require( './lib' ).toggleDisabled;
+var getRotator        = require( './lib' ).getRotator;
+var getScrollIndex    = require( './lib' ).getScrollIndex;
+var shouldDisableNext = require( './lib' ).shouldDisableNext;
 
 /**
  * The scroll listener on the carousel short circuits if the
@@ -71,6 +72,7 @@ module.exports.register = function ( args ) {
 
     // Disable the "previous" button
     toggleDisabled( previous, true );
+    toggleDisabled( next, shouldDisableNext( carousel, items ) );
 
     bindHandlers( carousel, items, next, previous );
 };
