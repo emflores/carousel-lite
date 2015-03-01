@@ -46,7 +46,7 @@ function bindHandlers ( carousel, items, next, previous ) {
         }
 
         carousel.currentIndex = Math.max(
-            syncScrollIndex( carousel, items ) - 1,
+            getScrollIndex( carousel, items ) - 1,
             0
         );
     });
