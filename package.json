@@ -21,9 +21,9 @@
   "author": "Michael Flores <flores.michael@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/emflores/carusel-lite/issues"
+    "url": "https://github.com/emflores/carousel-lite/issues"
   },
-  "homepage": "https://github.com/emflores/carusel-lite",
+  "homepage": "https://github.com/emflores/carousel-lite",
   "devDependencies": {
     "mocha": "^2.1.0",
     "proxyquire": "^1.3.1",
