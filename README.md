@@ -2,7 +2,7 @@
 
 > Touch friendly. Incredibly small. Carousels the native way.
 
-Carousel Lite looks to provide a simple carousel solution. With a very small amount of code, we can hijack the default scroll behavior of an overflowed list (which provides us the added benefit of touch support with no additional JS - see below).
+Carousel Lite aims to provide the most simple carousel solution possible. With a very small amount of code, we can hijack the default scroll behavior of an overflowed list (which provides us the added benefit of touch support with no additional JS - see below).
 
 ## Registering a carousel
 ```js
