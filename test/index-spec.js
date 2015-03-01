@@ -78,10 +78,11 @@ describe( 'Carousel Lite', function () {
         var eventListenerSpy = sinon.spy();
         var customEls = {
             previous: _assign( _clone( baseEls[ 'previous' ] ), { addEventListener: eventListenerSpy } ),
-            next: _assign( _clone( baseEls[ 'next'] ), { addEventListener: eventListenerSpy } )
+            next: _assign( _clone( baseEls[ 'next' ] ), { addEventListener: eventListenerSpy } ),
+            carousel: _assign( _clone( baseEls[ 'carousel' ] ), { addEventListener: eventListenerSpy } )
         };
         carousel = getCarousel( false, _assign( _clone( baseEls ), customEls ) );
         carousel.register( args );
-        eventListenerSpy.calledTwice.should.be.true;
+        eventListenerSpy.calledThrice.should.be.true;
     });
 });

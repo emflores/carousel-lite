@@ -3,10 +3,22 @@ var toggleDisabled  = require( './lib' ).toggleDisabled;
 var getRotator      = require( './lib' ).getRotator;
 var syncScrollIndex = require( './lib' ).syncScrollIndex;
 
+/**
+ * The scroll listener on the carousel short circuits if the
+ * ignoreScroll flag is set to true. This wrapper ensures that
+ * the handler can differentiate between a native scroll and a
+ * programmatic one.
+ * @param   {function}  rotate
+ * @param   {object}    carousel
+ * @return  {function}
+ */
 function addScrollSuppressor ( rotate, carousel ) {
     return function ( reverse ) {
         carousel.ignoreScroll = true;
         rotate( reverse );
+
+        // Setting this flag async ensures that the scroll handler
+        // is invoked first (allowing it to short circuit).
         setTimeout( function () {
             carousel.ignoreScroll = false;
         }, 0 );

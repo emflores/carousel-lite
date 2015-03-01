@@ -4,11 +4,19 @@ var _findIndex = require( 'lodash-compat/array/findIndex' );
 
 function isDisabled ( newIndex, nextPos, maxScroll ) {
     return {
-        previous:  newIndex === 0,
-        next:      nextPos >= maxScroll
+        previous: newIndex === 0,
+        next:     nextPos >= maxScroll
     };
 }
 
+/**
+ * When native scroll is utilized, estimate the scroll index position so
+ * that we have a starting spot if the user begins utilizing the next/previous
+ * buttons.
+ * @param  {object} carousel
+ * @param  {array}  items
+ * @return {integer}
+ */
 function syncScrollIndex ( carousel, items ) {
     var carouselScroll = carousel.scrollLeft;
     var carouselOffset = carousel.offsetLeft;

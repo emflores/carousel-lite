@@ -20,6 +20,10 @@ describe( 'Carousel Lite Lib', function () {
         });
     });
 
+    describe( 'Sync Scroll Index', function () {
+
+    });
+
     describe( 'Rotator', function () {
         var els = null;
         var rotate = null;
