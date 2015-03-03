@@ -2,7 +2,8 @@ var win               = require( './browser-shim' );
 var toggleDisabled    = require( './lib' ).toggleDisabled;
 var getRotator        = require( './lib' ).getRotator;
 var getScrollIndex    = require( './lib' ).getScrollIndex;
-var shouldDisableNext = require( './lib' ).shouldDisableNext;
+var carouselCanScroll = require( './lib' ).carouselCanScroll;
+var handleScroll      = require( './lib' ).handleScroll;
 
 /**
  * The scroll listener on the carousel short circuits if the
@@ -45,10 +46,7 @@ function bindHandlers ( carousel, items, next, previous ) {
             return;
         }
 
-        carousel.currentIndex = Math.max(
-            getScrollIndex( carousel, items ) - 1,
-            0
-        );
+        handleScroll( carousel, items, next, previous );
     });
 }
 
@@ -73,7 +71,7 @@ module.exports.register = function ( args ) {
     // Disable the "previous" button by default, and the next button
     // if the entirety of list fits within the carousel's clientWidth.
     toggleDisabled( previous, true );
-    toggleDisabled( next, shouldDisableNext( carousel, items ) );
+    toggleDisabled( next, carouselCanScroll( carousel, items ) );
 
     bindHandlers( carousel, items, next, previous );
 };

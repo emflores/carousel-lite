@@ -18,10 +18,10 @@ var getSpies = function ( els ) {
             return els[ sel ];
         }),
         querySelectorAll: sinon.spy( function ( sel ) {
-            return els[ sel ]
+            return els[ sel ];
         })
     };
-}
+};
 
 var getCarousel = function ( overrides, els ) {
     overrides = overrides || {};
@@ -42,7 +42,7 @@ var getCarousel = function ( overrides, els ) {
                 return _noop;
             },
             syncScrollIndex: _noop,
-            shouldDisableNext: _noop
+            carouselCanScroll: _noop
         }
     });
 };
