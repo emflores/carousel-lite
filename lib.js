@@ -2,10 +2,10 @@ var DISABLED = 'carousel-button-disabled';
 
 var _findIndex = require( 'lodash-compat/array/findIndex' );
 
-function isDisabled ( newIndex, nextPos, maxScroll ) {
+function isDisabled ( newIndex, newPos, carousel ) {
     return {
         previous: newIndex === 0,
-        next:     nextPos >= maxScroll
+        next:     newPos >= getMaxScroll( carousel )
     };
 }
 
@@ -26,10 +26,40 @@ function getScrollIndex ( carousel, items ) {
     });
 }
 
-function shouldDisableNext ( carousel, items ) {
+function getMaxScroll ( carousel ) {
+    return carousel.scrollWidth - carousel.clientWidth;
+}
+
+function getNextPosition ( carousel, newItem ) {
+    return newItem.offsetLeft - carousel.offsetLeft;
+}
+
+function syncPositionState ( carousel, items, newIndex, next, previous ) {
+    var newItem  = items[ newIndex ];
+    var nextPos  = getNextPosition( carousel, newItem );
+    var disabled = isDisabled( newIndex, nextPos, carousel );
+
+    toggleDisabled( previous, disabled.previous );
+    toggleDisabled( next, disabled.next );
+
+    return nextPos;
+}
+
+function carouselCanScroll ( carousel, items ) {
     var lastItem            = items[ items.length - 1 ];
     var lastItemRightOffset = lastItem.offsetLeft - carousel.offsetLeft + lastItem.offsetWidth;
     return lastItemRightOffset <= carousel.clientWidth;
+}
+
+function handleScroll ( carousel, items, next, previous ) {
+    var newIndex = Math.max(
+        getScrollIndex( carousel, items ) - 1,
+        0
+    );
+
+    syncPositionState( carousel, items, newIndex, next, previous );
+
+    carousel.currentIndex = newIndex;
 }
 
 function toggleDisabled ( el, shouldDisable ) {
@@ -40,23 +70,15 @@ function toggleDisabled ( el, shouldDisable ) {
 function getRotator ( carousel, items, next, previous ) {
     return function ( reverse ) {
         var currentIndex = carousel.currentIndex || 0;
-        var maxScroll    = carousel.scrollWidth - carousel.clientWidth;
         var incrementor  = reverse ? -1 : 1;
         var direction    = reverse ? previous : next;
         var newIndex     = currentIndex + incrementor;
-        var currentItem  = items[ newIndex ];
 
         if ( direction.classList.contains( DISABLED ) ) {
             return;
         }
 
-        var nextPos  = currentItem.offsetLeft - carousel.offsetLeft;
-        var disabled = isDisabled( newIndex, nextPos, maxScroll );
-
-        toggleDisabled( previous, disabled.previous );
-        toggleDisabled( next, disabled.next );
-
-        carousel.scrollLeft   = nextPos;
+        carousel.scrollLeft   = syncPositionState( carousel, items, newIndex, next, previous );
         carousel.currentIndex = newIndex;
     };
 }
@@ -64,4 +86,5 @@ function getRotator ( carousel, items, next, previous ) {
 module.exports.toggleDisabled    = toggleDisabled;
 module.exports.getRotator        = getRotator;
 module.exports.getScrollIndex    = getScrollIndex;
-module.exports.shouldDisableNext = shouldDisableNext;
+module.exports.carouselCanScroll = carouselCanScroll;
+module.exports.handleScroll      = handleScroll;
