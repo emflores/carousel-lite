@@ -32,8 +32,9 @@ function shouldDisableNext ( carousel, items ) {
     return lastItemRightOffset <= carousel.clientWidth;
 }
 
-function toggleDisabled ( el, add ) {
-    el.classList.toggle( DISABLED, add );
+function toggleDisabled ( el, shouldDisable ) {
+    el.classList.toggle( DISABLED, shouldDisable );
+    el.disabled = shouldDisable;
 }
 
 function getRotator ( carousel, items, next, previous ) {
