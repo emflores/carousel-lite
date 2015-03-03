@@ -54,7 +54,7 @@ The elements that you choose for your next/previous buttons can be anything, but
 ```
 
 ## Next/Previous Styles
-When the previous or next button is disabled (the carousel is at the beginning or end of a list, respectively), `carousel-button-disabled` is added to its class list. You can use this to style the buttons appropriately.
+When the previous or next button is disabled (the carousel is at the beginning or end of a list, respectively), `carousel-button-disabled` is added to its class list (the `disabled` attribute is also toggled, but is only relevant if you are using `button` elements for next/previous). You can use this to style the buttons appropriately.
 
 When a carousel is registered, the previous button is automatically disabled. The next button is disabled as well if the entirety of list fits within the carousel's clientWidth.
 
