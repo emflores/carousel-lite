@@ -97,7 +97,7 @@ function carouselCanScroll ( carousel, items ) {
  */
 function handleScroll ( carousel, items, next, previous ) {
     var newIndex = Math.max(
-        getScrollIndex( carousel, items ) - 1,
+        getScrollIndex( carousel, items ),
         0
     );
 
