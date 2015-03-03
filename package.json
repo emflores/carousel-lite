@@ -1,6 +1,6 @@
 {
   "name": "carousel-lite",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Touch friendly. Incredibly small. Carousels the native way.",
   "main": "index.js",
   "directories": {
