@@ -30,7 +30,7 @@ describe( 'Carousel Lite Lib', function () {
         });
     });
 
-    describe( 'Should Disable Next', function () {
+    describe( 'Carousel Can Scroll', function () {
         it( 'returns true if the last item in the list\'s right offset is <= the client width of the carousel', function () {
             var result = lib.carouselCanScroll(
                 _assign( _clone( baseEls[ 'carousel' ] ), { clientWidth: 150  } ),
