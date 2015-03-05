@@ -1,7 +1,5 @@
 var DISABLED = 'carousel-button-disabled';
 
-var _findIndex = require( 'lodash-compat/array/findIndex' );
-
 /**
  * Returns max leftOffset for the carousel
  * @param  {object} carousel
@@ -38,9 +36,13 @@ function getScrollIndex ( carousel, items ) {
     var carouselScroll = carousel.scrollLeft;
     var carouselOffset = carousel.offsetLeft;
 
-    return _findIndex( items, function ( item ) {
-        return ( item.offsetLeft - carouselOffset ) >= carouselScroll;
-    });
+    for ( var i = 0; i < items.length; ++i ) {
+        if ( ( items[ i ].offsetLeft - carouselOffset ) >= carouselScroll ) {
+            return i;
+        }
+    }
+
+    return -1;
 }
 
 /**
