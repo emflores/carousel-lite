@@ -1,5 +1,5 @@
-var _clone  = require( 'lodash/lang/cloneDeep' );
-var _assign = require( 'lodash/object/assign' );
+var _clone  = require( 'lodash-compat/lang/cloneDeep' );
+var _assign = require( 'lodash-compat/object/assign' );
 
 module.exports.args = {
     carousel: 'carousel',
